@@ -1,0 +1,22 @@
+{
+  "name": "blea2mqtt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@abandonware/noble": "^1.9.2-14",
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "lodash": "^4.17.21",
+    "mqtt": "^4.2.8"
+  }
+}
