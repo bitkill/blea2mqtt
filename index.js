@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
-import mqtt from "mqtt"
+import dotenv from 'dotenv'
+import mqtt from 'mqtt'
 import * as nobleModule from '@abandonware/noble'
 import * as MiParser from './parsers/mi_parser.js'
 import * as QPParser from './parsers/qingping_parser.js'
@@ -14,7 +14,7 @@ const parsers = [
 
 dotenv.config()
 
-const publishTopic = process.env.MQTT_TOPIC || "ble_sensors"
+const publishTopic = process.env.MQTT_TOPIC || 'ble_sensors/needsNameConfig'
 
 const mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_HOSTNAME}`, {
   username: process.env.MQTT_USERNAME,
@@ -26,31 +26,27 @@ function decodeData (peripheral) {
   //console.log(peripheral.advertisement.serviceUuids)
   const {advertisement: {serviceData} = {}, id, address} = peripheral || {}
 
-  if (peripheral.advertisement.localName == "Qingping Temp & RH Lite") {
-    console.log(JSON.stringify(serviceData))
-  }
+  serviceData.forEach((iter) => {
+    if (!iter) return
+    try {
 
-    serviceData.forEach((iter) => {
-      if (!iter) return
-      try {
+      let result = parsers.reduce((a, rootParser) => {
+        if (_.includes(rootParser.SERVICE_DATA_UUIDS, iter.uuid.toLowerCase())) {
+          return new rootParser.Parser(iter.data).parse()
+        }
+        return a
+      }, null)
 
-        let result = parsers.reduce((a, rootParser) => {
-          if (_.includes(rootParser.SERVICE_DATA_UUIDS, iter.uuid.toLowerCase())) {
-            return new rootParser.Parser(iter.data).parse()
-          }
-          return a
-        }, null)
+      if (!result) return
 
-        if (!result) return
-
-        mqttClient.publish(
-          publishTopic + '/' + result.parser + '/' + result.macAddress,
-          JSON.stringify(result)
-        )
-      } catch (error) {
-        console.error(error)
-      }
-    })
+      mqttClient.publish(
+        publishTopic + '/' + result.parser + '/' + result.macAddress,
+        JSON.stringify(result)
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  })
 }
 
 function onDiscovery (peripheral) {
@@ -63,9 +59,10 @@ function onDiscovery (peripheral) {
   if (!peripheral.advertisement.serviceData) return
   // output what we have
   console.log(
-    peripheral.address,
-    JSON.stringify(peripheral.advertisement.localName),
-    (peripheral.rssi)
+    peripheral.address || "no-address-yet",
+    JSON.stringify(peripheral.advertisement.localName || peripheral.address || "no-name"),
+    peripheral.rssi,
+    signalStrengthPercentage(peripheral.rssi)
   )
   decodeData(peripheral)
 }
@@ -85,3 +82,31 @@ noble.on('scanStop', function () {
   console.log('BLE Scanning stopped.')
   mqttClient.end()
 })
+
+function signalStrengthBars (rssi) {
+  let bars = '▂▄▆█'
+  if (rssi >= -65) {
+    // strong
+    return bars
+  }
+
+  if (rssi >= -73) {
+    // good
+    return bars.substr(0, 3)
+  }
+
+  if (rssi >= -80) {
+    return bars.substr(0, 2)
+  }
+
+  if (rssi >= -94) {
+    return bars.substr(0, 1)
+  }
+
+  return '─'
+}
+
+function signalStrengthPercentage (rssi) {
+  // Quality as percentage max -40 min -110
+  return ((rssi + 110) * 10 / 7).toFixed(0) + "%"
+}

@@ -8,9 +8,9 @@ Why transmit this to mqtt?
 A service to read Bluetooth low energy sensors in nodejs.
 
 ### Requirements
- - nodejs (`brew install node` or `apt install nodejs npm -y`)
+ - nodejs v12+ (`brew install node` or [using nvm](ttps://github.com/nvm-sh/nvm#install--update-script))
  - `yarn` (`npm i -g yarn`)
- - a bluetooth modem capable of BLE
+ - a Bluetooth modem capable of BLE
 
 
 ### Getting started
