@@ -12,6 +12,13 @@ A service to read Bluetooth low energy sensors in nodejs.
  - `yarn` (`npm i -g yarn`)
  - a Bluetooth modem capable of BLE
 
+### Devices tested & working with this project
+
+ - `LYWSDCGQ` Mi Thermohygrometer, powered by 1xAAA
+ - `HHCCJCY01` Mi Flora, also available from a lot of other brands, powered by 1xCR2032
+ - `CGDK2`, a newer version of the Mi Thermohygrometer, powered by 1xCR2430
+   - For this device to broadcast useful data, a pair to the official `Qingping+` app was needed
+
 
 ### Getting started
 
