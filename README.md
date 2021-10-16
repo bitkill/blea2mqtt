@@ -1,4 +1,4 @@
-# blea2mqtt
+## blea2mqtt
 Send BLE sensors data to MQTT
 
 Why transmit this to mqtt? 
@@ -7,13 +7,13 @@ Why transmit this to mqtt?
 
 A service to read Bluetooth low energy sensors in nodejs.
 
-## Requirements
- - nodejs (`brew install node` or `apt install nodejs`)
- - `yarn` (a alternative to `npm`)
+### Requirements
+ - nodejs (`brew install node` or `apt install nodejs npm -y`)
+ - `yarn` (`npm i -g yarn`)
  - a bluetooth modem capable of BLE
 
 
-## Getting started
+### Getting started
 
 Before running this, keep in mind that this was tested with
 ubuntu and macOS in mind.
@@ -44,13 +44,14 @@ There are a few things to configure in the `.env` file:
 | MQTT_PASSWORD | Mqtt server password for the given user |
 | MQTT_TOPIC    | Mqtt topic to publish information, includes the machine name |
 
+
 To install dependencies run the service, just:
 
 ```shell
 yarn && yarn start
 ```
 
-## Project wishlist
+### Project wishlist
 
  - [ ] Docker image
 
