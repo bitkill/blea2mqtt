@@ -137,13 +137,16 @@ export class Parser {
     return {
       parser: PARSER_NAME,
       frameControl: this.frameControl,
-      event: this.event,
-      productId: this.productId,
-      frameCounter: this.frameCounter,
+      eventLength: this.eventLength,
       macAddress: this.macAddress,
-      eventType: this.eventType,
-      capabilities: this.capabilities,
-      //eventLength: this.eventLength,
+      version: this.version,
+      info: {
+        event: this.event,
+        deviceType: this.productId,
+        frameCounter: this.frameCounter,
+        eventType: this.eventType,
+        // capabilities: this.capabilities,
+      }
       //version: this.version
     }
   }

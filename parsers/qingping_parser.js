@@ -36,12 +36,17 @@ export class Parser {
 
     this.deviceType = this.parseDeviceType()
     this.macAddress = this.parseMacAddress()
-    this.event = this.parseEventData()
+    this.eventId = this.parseEventId()
+    this.event = this.parseEventData(this.eventId)
     return {
       parser: PARSER_NAME,
-      deviceType: this.deviceType,
       macAddress: this.macAddress,
-      event: this.event
+      info: {
+        deviceType: this.deviceType,
+        eventType: this.eventId,
+        event: this.event,
+      }
+
     }
   }
 
@@ -58,9 +63,11 @@ export class Parser {
   toString () {
     return this.buffer.toString('hex')
   }
-  parseEventData () {
+  parseEventId() {
+    return this.buffer.readUInt8(8)
+  }
+  parseEventData (eventId) {
     let dataPosition = 10
-    let eventId = this.buffer.readUInt8(dataPosition - 2)
     //let eventSize = this.buffer.readUInt8(xDataPoint - 1)
     switch (eventId) {
       case 0x01: // temperature & humidity

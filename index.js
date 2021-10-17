@@ -14,7 +14,10 @@ const parsers = [
 
 dotenv.config()
 
-const publishTopic = process.env.MQTT_TOPIC || 'ble_sensors/needsNameConfig'
+const topic = process.env.MQTT_TOPIC || 'ble_sensors'
+const machineName = process.env.MACHINE_NAME || 'needsNameInConfig'
+
+const publishTopic = topic + '/' + machineName
 
 const mqttClient = mqtt.connect(`mqtt://${process.env.MQTT_HOSTNAME}`, {
   username: process.env.MQTT_USERNAME,
@@ -39,9 +42,18 @@ function decodeData (peripheral) {
 
       if (!result) return
 
+      let wrappedResult = {
+        macAddress: result.macAddress,
+        rssi: peripheral.rssi,
+        receivedFrom: machineName,
+        parser: result.parser,
+        result: result.info
+      }
+
+      console.info("PUB:", wrappedResult.macAddress, result.info)
       mqttClient.publish(
-        publishTopic + '/' + result.parser + '/' + result.macAddress,
-        JSON.stringify(result)
+        topic,
+        JSON.stringify(wrappedResult)
       )
     } catch (error) {
       console.error(error)
@@ -58,13 +70,17 @@ function onDiscovery (peripheral) {
   // ignore devices with no manufacturer data
   if (!peripheral.advertisement.serviceData) return
   // output what we have
-  console.log(
-    peripheral.address || "no-address-yet",
-    JSON.stringify(peripheral.advertisement.localName || peripheral.address || "no-name"),
-    peripheral.rssi,
-    signalStrengthPercentage(peripheral.rssi)
-  )
+
   decodeData(peripheral)
+
+  if (process.env.BLE_DEBUG == 'true') {
+    console.debug(
+      peripheral.address || 'no-address-yet',
+      JSON.stringify(peripheral.advertisement.localName || peripheral.address || 'no-name'),
+      peripheral.rssi,
+      signalStrengthPercentage(peripheral.rssi)
+    )
+  }
 }
 
 noble.on('warning', (warning) => console.warn(warning))
@@ -108,5 +124,5 @@ function signalStrengthBars (rssi) {
 
 function signalStrengthPercentage (rssi) {
   // Quality as percentage max -40 min -110
-  return ((rssi + 110) * 10 / 7).toFixed(0) + "%"
+  return ((rssi + 110) * 10 / 7).toFixed(0) + '%'
 }

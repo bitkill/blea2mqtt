@@ -49,7 +49,9 @@ There are a few things to configure in the `.env` file:
 | MQTT_HOSTNAME | Mqtt server location |
 | MQTT_USERNAME | Mqtt server user     |
 | MQTT_PASSWORD | Mqtt server password for the given user |
-| MQTT_TOPIC    | Mqtt topic to publish information, includes the machine name |
+| MQTT_TOPIC    | Mqtt topic to publish information |
+| MACHINE_NAME  | Name your data collection node |
+| BLE_DEBUG     | Shows extra data (all ble broadcasts) |
 
 
 To install dependencies run the service, just:
