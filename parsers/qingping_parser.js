@@ -32,7 +32,7 @@ export class Parser {
   }
 
   parse () {
-    console.log(JSON.stringify(this.buffer))
+    // console.log(JSON.stringify(this.buffer))
 
     this.deviceType = this.parseDeviceType()
     this.macAddress = this.parseMacAddress()
