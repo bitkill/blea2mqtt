@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "tsc && node dist/index.js",
     "oldstart": "node index.old.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "ci": "jest --ci"
   },
   "keywords": [],
   "author": "",
@@ -23,9 +24,12 @@
   },
   "devDependencies": {
     "@types/eslint": "^7.28.1",
+    "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.176",
     "@types/node": "^16.11.2",
     "eslint": "^8.0.1",
-    "prettier": "^2.4.1"
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.4.0"
   }
 }
