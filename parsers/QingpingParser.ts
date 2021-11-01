@@ -55,7 +55,7 @@ export class QingpingParser implements ParserProvider {
             case EventTypes.pressure:
                 return { pressure: buffer.readUInt16LE(dataPosition) };
             default:
-                return { unknownData: true };
+                return { eventType: eventId, unrecognizedEvents: true };
         }
     }
 }
