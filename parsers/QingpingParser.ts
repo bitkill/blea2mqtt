@@ -19,28 +19,29 @@ export class QingpingParser implements ParserProvider {
             eventLength: 0,
             macAddress: this.parseMacAddress(buffer),
             parser: this.parserName,
+            deviceType: this.parseDeviceType(buffer),
             version: null,
             info: this.parseEventData(buffer)
         }
         return z    }
 
-    parseDeviceType(buffer: Buffer) {
+    parseDeviceType(buffer: Buffer) : string {
         let deviceId = buffer.readUInt8(1);
-        return qpTypes.get(deviceId) || deviceId;
+        return qpTypes.get(deviceId) || deviceId.toString();
     }
 
-    parseMacAddress(buffer: Buffer) {
+    parseMacAddress(buffer: Buffer) : string {
         const macBuffer = buffer.slice(2, 8);
         return Buffer.from(macBuffer).reverse().toString('hex');
     }
 
-    toString(buffer: Buffer) {
+    toString(buffer: Buffer) : string {
         return buffer.toString('hex');
     }
-    parseEventId(buffer: Buffer) {
+    parseEventId(buffer: Buffer) : number {
         return buffer.readUInt8(8);
     }
-    parseEventData(buffer: Buffer) {
+    parseEventData(buffer: Buffer) : Object {
         let dataPosition = 10;
         let eventId = this.parseEventId(buffer)
         //let eventSize = this.buffer.readUInt8(xDataPoint - 1)

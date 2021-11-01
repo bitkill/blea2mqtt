@@ -43,6 +43,7 @@ export class MiParser implements ParserProvider {
             eventLength: 0,
             macAddress: this.parseMacAddress(buffer, frameControl),
             parser: this.parserName,
+            deviceType: this.parseProductId(buffer),
             version: this.parseVersion(buffer).toString(),
             info: this.parseEventData(buffer, frameControl)
         }
