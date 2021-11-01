@@ -33,18 +33,16 @@ function decodeData(peripheral: Peripheral) {
             if (!parser) return;
 
             const result = parser.parse(iter.data)
-            if (!parser) return;
+            if (!result) return;
 
-            let wrappedResult: { result: any; macAddress: any; rssi: number; parser: any; receivedFrom: string };
+            let wrappedResult: { result: any; macAddress: any; rssi: number; parser: any; deviceType: string, receivedFrom: string };
 
             wrappedResult = {
-                // @ts-ignore
                 macAddress: result.macAddress,
                 rssi: peripheral.rssi,
                 receivedFrom: machineName,
-                // @ts-ignore
                 parser: result.parser,
-                // @ts-ignore
+                deviceType: result.deviceType,
                 result: result.info
             };
 
