@@ -26,7 +26,6 @@ function decodeData(peripheral: Peripheral) {
     peripheral.advertisement.serviceData.forEach((iter) => {
         if (!iter) return;
         try {
-            // @ts-ignore
             let parser = parsers.find(
                 parserProvider =>
                     _.includes(parserProvider.serviceDataUuids, iter.uuid.toLowerCase()))
@@ -46,7 +45,6 @@ function decodeData(peripheral: Peripheral) {
                 result: result.info
             };
 
-            // @ts-ignore
             console.info('PUB:', wrappedResult.macAddress, result.info);
             mqttClient.publish(topic, JSON.stringify(wrappedResult));
         } catch (error) {
