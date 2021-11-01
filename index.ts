@@ -65,14 +65,14 @@ function onDiscovery(peripheral: Peripheral): void {
 
     decodeData(peripheral);
 
-    //if (process.env.BLE_DEBUG == 'true') {
+    if (process.env.BLE_DEBUG == 'true') {
         console.debug(
             peripheral.address || 'no-address-yet',
             JSON.stringify(peripheral.advertisement.localName || peripheral.address || 'no-name'),
             peripheral.rssi,
             signalStrengthPercentage(peripheral.rssi)
         );
-    //}
+    }
 }
 
 noble.on('warning', (warning: String) => console.warn(warning));
