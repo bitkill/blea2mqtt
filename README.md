@@ -1,6 +1,6 @@
 ## blea2mqtt
 
-![build](https://github.com/bitkill/blea2mqtt/actions/workflows/main.yml/badge.svg)
+![build](https://github.com/bitkill/blea2mqtt/actions/workflows/node.js.yml/badge.svg)
 
 Send BLE sensors data to MQTT
 
