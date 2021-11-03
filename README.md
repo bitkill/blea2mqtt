@@ -1,5 +1,7 @@
 ## blea2mqtt
 
+![build](https://github.com/bitkill/blea2mqtt/actions/workflows/main.yml/badge.svg)
+
 Send BLE sensors data to MQTT
 
 Why transmit this to mqtt?
