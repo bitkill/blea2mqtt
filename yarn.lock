@@ -962,10 +962,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/eslint@^8.4.8":
-  version "8.4.8"
-  resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-8.4.8.tgz#720dd6a32b8219b9aba1a07b13e9d03b622695fd"
-  integrity sha512-zUCKQI1bUCTi+0kQs5ZQzQ/XILWRLIlh15FXWNykJ+NG3TMKMVvwwC6GP3DR1Ylga15fB7iAExSzc4PNlR5i3w==
+"@types/eslint@^8.4.10":
+  version "8.4.10"
+  resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-8.4.10.tgz#19731b9685c19ed1552da7052b6f668ed7eb64bb"
+  integrity sha512-Sl/HOqN8NKPmhWo2VBEPm0nvHnu2LL3v9vKo8MEq0EtbJ4eVzGPl41VNPvn5E1i5poMk4/XD8UriLHpJvEP/Nw==
   dependencies:
     "@types/estree" "*"
     "@types/json-schema" "*"
