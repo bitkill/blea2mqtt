@@ -16,7 +16,7 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-21",
     "crypto": "^1.0.1",
-    "dotenv": "^16.3.0",
+    "dotenv": "^16.3.1",
     "esm": "^3.2.25",
     "lodash": "^4.17.21",
     "mqtt": "^4.3.7",
