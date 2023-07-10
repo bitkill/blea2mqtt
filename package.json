@@ -23,11 +23,11 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
-    "@types/eslint": "^8.40.2",
+    "@types/eslint": "^8.44.0",
     "@types/jest": "^29.5.2",
     "@types/lodash": "^4.14.195",
     "@types/node": "^20.4.1",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "jest": "^29.6.1",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1"
