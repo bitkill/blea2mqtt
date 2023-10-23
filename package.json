@@ -14,7 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@abandonware/noble": "^1.9.2-21",
+    "@abandonware/noble": "^1.9.2-23",
     "crypto": "^1.0.1",
     "dotenv": "^16.3.1",
     "esm": "^3.2.25",
